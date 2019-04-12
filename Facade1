@@ -11,7 +11,7 @@ import proxy.*;
 public class Facade1 {
 
     private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-    private static ArrayList<Ruta> rutas = new ArrayList<Ruta>();
+    private static ArrayList<MedioTransporte> medio = new ArrayList<medio>();
     private static ArrayList<Reserva> reservas = new ArrayList<Reserva>();
     private static ArrayList<ComponenteD> pagos = new ArrayList<ComponenteD>();
     private FlyWeightFactory fabricaUsers = new FlyWeightFactory();
@@ -74,44 +74,44 @@ public class Facade1 {
         return info;
     }
 
-    public void crearRegistroRuta(String nombreRuta, ArrayList<Componente> calles, String documentoConductor) {
-        Ruta ruta = new Ruta(nombreRuta, documentoConductor);
-        ruta.setComponentes(calles);
-        rutas.add(ruta);
+    public void crearMedioTransporte(String tipo,  ArrayList<Componente> medio) {
+        medio medio = new Medio(tipo);
+        medio.setComponentes(medio);
+        medio.add(MedioTransporte);
     }
 
-    public String listarRutasConductor(String documento) {
-        String infoRutas = "No se encontraron las rutas para el documento " + documento;
+    public String listarMedioTransporte(String tipo) {
+        String infoMedio = "No se encuentra este medio de trasporte" + tipo;
         String info = "";
-        for (int i = 0; i < rutas.size(); i++) {
-            if (rutas.get(i).getDocumentoConductor().equals(documento)) {
-                info += (i++) + rutas.get(i).obtenerDatos() + "\n\n";
+        for (int i = 0; i < medio.size(); i++) {
+            if (medio.get(i).getDocumentoConductor().equals(documento)) {
+                info += (i++) + medio.get(i).obtenerDatos() + "\n\n";
             }
         }
-        return (info.isEmpty() ? infoRutas : info);
+        return (info.isEmpty() ? infoMedio : info);
     }
 
-    public void actualizarRuta(String nombreRutaModificar, String nombreRutaNuevo, ArrayList<Componente> callesModificadas, String documentoConductor) {
+    public void actualizarMedio(String tipo, ArrayList<Componente> medio) {
         int position = 0;
-        for (Ruta ru : rutas) {
-            if (ru.getNombre().equals(nombreRutaModificar)) {
-                Ruta rutaNueva = new Ruta(nombreRutaNuevo, documentoConductor);
-                rutaNueva.setComponentes(callesModificadas);
-                rutas.set(position, rutaNueva);
+        for (medio ru : medio) {
+            if (ru.getNombre().equals(nombreMedioModificar)) {
+                medio medio Nueva = new medio(tipo);
+                medioNueva.setComponentes(callesModificadas);
+                medio.set(position, medioNueva);
             }
             position++;
         }
     }
 
-    public void eliminarRuta(String nombreRuta, String documentoConductor) {
-        System.out.println("antes" + rutas.size());
-        for (Ruta rut : rutas) {
-            if (rut.getNombre().equals(nombreRuta) && rut.getDocumentoConductor().equals(documentoConductor)) {
+    public void eliminarMedio(String tipo) {
+        System.out.println("antes" + medio.size());
+        for (medio rut : medio) {
+            if (rut.getTipo().equals(tipo) && rut.getDocumentoConductor().equals(documentoConductor)) {
                 System.out.println(rut);
-                rutas.remove(rut);
+                medio.remove(rut);
             }
         }
-        System.out.println("Desoues" + rutas.size());
+        System.out.println("Desoues" + medio.size());
 
     }
 
@@ -126,7 +126,7 @@ public class Facade1 {
         for (Reserva re : reservas) {
             if (re.getDocumentoPasajero().equals(documentoPasajero)) {
                 lista += "Nombre reserva: " + re.getNombreReserva()
-                        + "Nombre ruta reservada: " + re.getNombreRutaReservada()
+                        + "Nombre medio reservada: " + re.getNombreRutaReservada()
                         + " \tPuesto reservado: " + re.getPuestoAReservar();
             }
         }
